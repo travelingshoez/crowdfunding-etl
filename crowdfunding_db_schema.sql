@@ -4,22 +4,18 @@
 
 CREATE TABLE `campaign` (
     `cf_id` int  NOT NULL ,
-    `company_name` int  NOT NULL ,
+    `company_name` varchar(100)  NOT NULL ,
     `description` varchar(100)  NOT NULL ,
     `goal` numeric(10,2)  NOT NULL ,
     `pledged` numeric(10,2)  NOT NULL ,
     `outcome` varchar(20)  NOT NULL ,
-    `backes_count` int  NOT NULL ,
+    `backers_count` int  NOT NULL ,
     `country` varchar(10)  NOT NULL ,
     `currency` varchar(20)  NOT NULL ,
     `launched_date` date  NOT NULL ,
-    `deadline` date  NOT NULL ,
-    `staff_pick` varchar(10)  NOT NULL ,
-    `spotlight` varchar(10)  NOT NULL ,
-    `category_sub-category` varchar(40)  NOT NULL ,
-    `category` varchar(20)  NOT NULL ,
-    `subcategory_id` varchar(20)  NOT NULL ,
     `end_date` date  NOT NULL ,
+    `category_id` varchar(10)  NOT NULL ,
+    `subcategory_id` varchar(20)  NOT NULL ,
     PRIMARY KEY (
         `cf_id`
     )
@@ -27,9 +23,10 @@ CREATE TABLE `campaign` (
 
 CREATE TABLE `contacts` (
     `contact_id` int  NOT NULL ,
+    `name` varchar(50)  NOT NULL ,
+    `email` varchar(50)  NOT NULL ,
     `first_name` varchar(50)  NOT NULL ,
-    `last_name` varchar(50)  NOT NULL ,
-    `email` varchar(50)  NOT NULL 
+    `last_name` varchar(50)  NOT NULL 
 );
 
 CREATE TABLE `category` (
@@ -50,7 +47,7 @@ CREATE TABLE `backer` (
     `email` varchar(50)  NOT NULL 
 );
 
-ALTER TABLE `campaign` ADD CONSTRAINT `fk_campaign_category` FOREIGN KEY(`category`)
+ALTER TABLE `campaign` ADD CONSTRAINT `fk_campaign_category_id` FOREIGN KEY(`category_id`)
 REFERENCES `category` (`category_id`);
 
 ALTER TABLE `campaign` ADD CONSTRAINT `fk_campaign_subcategory_id` FOREIGN KEY(`subcategory_id`)
